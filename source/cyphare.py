@@ -134,6 +134,6 @@ class PushFile :
 	
 	def push(self) -> bool :
 		path = create_string_buffer(bytes(self.path.encode()))
-		result = rufshare_func.push_file(POINTER(self.config), path)
+		result = rufshare_func.push_file(byref(self.config), path)
 		#TODO
 		return True if (result == 0) else False
