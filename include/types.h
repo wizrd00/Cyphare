@@ -1,6 +1,7 @@
 #ifndef CYPHARE_TYPES_H
 #define CYPHARE_TYPES_H
 
+#include "librufshare/rufshare.h"
 #include <stddef.h>
 #include <stdbool.h>
 
@@ -13,6 +14,7 @@
 #define PULLOPTSTR ":n:s:"
 
 #define GLOBAL_ERROR "getopt() failed, something went wrong!\n\n"
+#define TASK_ERROR "invalid task %s\n\n"
 #define MISSED_ERROR "missed argument for option -%c\n\n"
 #define UNKNOWN_ERROR "unknown option -%c\n\n"
 #define INV_SRCADDR_ERROR "invalid source address format\n\n"
@@ -20,6 +22,14 @@
 #define INV_CHSIZE_ERROR "invalid chunk size, maximum size is 65535 bytes\n\n"
 #define INV_FILE_ERROR "invalid file path %s\n\n"
 #define INV_NAME_ERROR "invalid name %s\n\n"
+
+#define DEFAULT_SRC_IP "0.0.0.0"
+#define DEFAULT_SRC_PORT 1308
+#define DEFAULT_CHUNK_SIZE 0xffff
+
+#define DEFAULT_SPT_CAST 8
+#define DEFAULT_SP_INTERVAL 16
+#define DEFAULT_SP_TRYCOUNT 4
 
 #define CHECK_ARGC(val)\
 	do {if (val < 2) {fprintf(stderr, help); return 1;}} while (0)

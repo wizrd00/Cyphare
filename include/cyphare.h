@@ -3,7 +3,8 @@
 
 #include "types.h"
 #include "utils/checkargs.h"
-#include "librufshare/rufshare.h"
+#include "utils/argparse.h"
+#include "utils/mkconfig.h"
 #include <stdlib.h>
 #include <string.h>
 
