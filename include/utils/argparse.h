@@ -5,10 +5,12 @@
 #include "utils/randname.h"
 #include <getopt.h>
 
+extern char help[];
+
 static inline int scan_argparse(int argc, char *argv[], args_t *args)
 {
 	int opt;
-	printf("here\n");
+	optind = 2;
 	args->scan.ip_spec = false;
 	args->scan.port_spec = false;
 	while ((opt = getopt(argc, argv, SCANOPTSTR)) != -1)
@@ -41,7 +43,7 @@ static inline int scan_argparse(int argc, char *argv[], args_t *args)
 static inline int push_argparse(int argc, char *argv[], args_t *args)
 {
 	int opt;
-	printf("here\n");
+	optind = 2;
 	args->push.chsize_spec = false;
 	args->push.path_spec = false;
 	args->push.name_spec = false;
@@ -95,7 +97,7 @@ static inline int push_argparse(int argc, char *argv[], args_t *args)
 static int pull_argparse(int argc, char *argv[], args_t *args)
 {
 	int opt;
-	printf("here\n");
+	optind = 2;
 	args->pull.name_spec = false;
 	args->pull.ip_spec = false;
 	args->pull.port_spec = false;
@@ -122,11 +124,11 @@ static int pull_argparse(int argc, char *argv[], args_t *args)
 				return 1;
 		}
 	if (!args->pull.name_spec)
-		mkrandname(conf->addrs.name);
-	if (!args->pull.src_ip_spec)
-		strncpy(args->pull.src_ip, DEFAULT_SRC_IP, MAXIPV4SIZE);
-	if (!args->pull.src_port_spec)
-		args->pull.src_port = DEFAULT_SRC_PORT;
+		mkrandname(args->pull.name);
+	if (!args->pull.ip_spec)
+		strncpy(args->pull.ip, DEFAULT_SRC_IP, MAXIPV4SIZE);
+	if (!args->pull.port_spec)
+		args->pull.port = DEFAULT_SRC_PORT;
 	return 0;
 }
 

@@ -27,9 +27,19 @@
 #define DEFAULT_SRC_PORT 1308
 #define DEFAULT_CHUNK_SIZE 0xffff
 
-#define DEFAULT_SPT_CAST 8
+#define DEFAULT_HST_SEND 8
+#define DEFAULT_HST_RECV 8
+#define DEFAULT_TFT_FLOW 8
+#define DEFAULT_TFT_RECV 8
+#define DEFAULT_TFT_DATA 8
+#define DEFAULT_VFT_SEND 8
+#define DEFAULT_VFT_RECV 8
+#define DEFAULT_SP_CAST 8
+#define DEFAULT_BC_INTERVAL 16
 #define DEFAULT_SP_INTERVAL 16
+#define DEFAULT_TF_TRYCOUNT 4
 #define DEFAULT_SP_TRYCOUNT 4
+#define DEFAULT_BC_TRYCOUNT 4
 
 #define CHECK_ARGC(val)\
 	do {if (val < 2) {fprintf(stderr, help); return 1;}} while (0)

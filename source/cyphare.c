@@ -20,21 +20,28 @@ static char help[] =
 int main(int argc, char *argv[])
 {
 	args_t args;
-	int opt;
+	InitConfig config;
+	PairInfo *info;
+	size_t info_len;
+	pthread_t handle;
 	CHECK_ARGC(argc);
-	optind = 2;
 	if (strcmp(argv[1], SCANSTR) == 0) {
 		if (scan_argparse(argc, argv, &args) != 0)
 			return 1;
-		mkconfig_scan();
+		mkconfig_scan(&config, &args);
+		scanpair(&config, info, &info_len);
 	}
 	else if (strcmp(argv[1], PUSHSTR) == 0) {
 		if (push_argparse(argc, argv, &args) != 0)
 			return 1;
+		mkconfig_push(&config, &args);
+		push_file(&config, args.push.path);
 	}
 	else if (strcmp(argv[1], PULLSTR) == 0) {
 		if (pull_argparse(argc, argv, &args) != 0)
 			return 1;
+		mkconfig_pull(&config, &args);
+		//TODO
 	}
 	else {
 		fprintf(stderr, TASK_ERROR, argv[1]);
