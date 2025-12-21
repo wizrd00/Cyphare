@@ -203,11 +203,11 @@ typedef struct {
 	size_t segsize;
 	int hst_send;
 	int hst_recv;
+	int vft_send;
+	int vft_recv;
 	int tft_flow;
 	int tft_recv;
 	int tft_data;
-	int vft_send;
-	int vft_recv;
 	int bct_cast;
 	int spt_cast;
 	short bc_interval;

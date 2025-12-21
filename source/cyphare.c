@@ -21,27 +21,25 @@ int main(int argc, char *argv[])
 {
 	args_t args;
 	InitConfig config;
-	PairInfo *info;
-	size_t info_len;
 	pthread_t handle;
 	CHECK_ARGC(argc);
 	if (strcmp(argv[1], SCANSTR) == 0) {
 		if (scan_argparse(argc, argv, &args) != 0)
 			return 1;
 		mkconfig_scan(&config, &args);
-		scanpair(&config, info, &info_len);
+		tryexec(launch_scanpair(&config));
 	}
 	else if (strcmp(argv[1], PUSHSTR) == 0) {
 		if (push_argparse(argc, argv, &args) != 0)
 			return 1;
 		mkconfig_push(&config, &args);
-		push_file(&config, args.push.path);
+		tryexec(launch_push_file(&config, args.push.path));
 	}
 	else if (strcmp(argv[1], PULLSTR) == 0) {
 		if (pull_argparse(argc, argv, &args) != 0)
 			return 1;
 		mkconfig_pull(&config, &args);
-		//TODO
+		tryexec(launch_pull_file(&config, args.pull.path));
 	}
 	else {
 		fprintf(stderr, TASK_ERROR, argv[1]);
