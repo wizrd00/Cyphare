@@ -7,7 +7,6 @@
 #include "utils/mkconfig.h"
 #include <stdlib.h>
 #include <string.h>
-#include <pthread.h>
 
 int main(int argc, char *argv[]);
 

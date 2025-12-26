@@ -9,9 +9,6 @@
 #define SCANSTR "scan"
 #define PUSHSTR "push"
 #define PULLSTR "pull"
-#define SCANOPTSTR ":s:"
-#define PUSHOPTSTR ":c:f:n:s:d:"
-#define PULLOPTSTR ":n:s:"
 
 #define GLOBAL_ERROR "getopt() failed, something went wrong!\n\n"
 #define TASK_ERROR "invalid task %s\n\n"
@@ -22,11 +19,15 @@
 #define INV_CHSIZE_ERROR "invalid chunk size, maximum size is 65535 bytes\n\n"
 #define INV_FILE_ERROR "invalid file path %s\n\n"
 #define INV_NAME_ERROR "invalid name %s\n\n"
+#define PTHREAD_CREATE_ERROR "pthread_create() failed\n\n"
+#define PTHREAD_ATTR_ERROR "pthread_attr_init() failed\n\n"
+#define THREAD_BROADCAST_ERROR "broadcast() thread failed\n\n"
 
 #define DEFAULT_SRC_IP "0.0.0.0"
 #define DEFAULT_SRC_PORT 1308
+#define DEFAULT_DST_IP "255.255.255.255"
+#define DEFAULT_DST_PORT 1308
 #define DEFAULT_CHUNK_SIZE 0xffff
-
 #define DEFAULT_HST_SEND 8
 #define DEFAULT_HST_RECV 8
 #define DEFAULT_TFT_FLOW 8
@@ -40,6 +41,12 @@
 #define DEFAULT_TF_TRYCOUNT 4
 #define DEFAULT_SP_TRYCOUNT 4
 #define DEFAULT_BC_TRYCOUNT 4
+
+#define CHECK_EQUAL(val0, val1, err)\
+	do {if (val0 != val1) {fprintf(stderr, err); return -1;}} while (0)
+
+#define CHECK_NOTEQUAL(val0, val1, err)\
+	do {if (val0 == val1) {fprintf(stderr, err); return -1;}} while (0)
 
 #define CHECK_ARGC(val)\
 	do {if (val < 2) {fprintf(stderr, help); return 1;}} while (0)

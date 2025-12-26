@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 		if (pull_argparse(argc, argv, &args) != 0)
 			return 1;
 		mkconfig_pull(&config, &args);
-		tryexec(launch_pull_file(&config, args.pull.path));
+		tryexec(launch_pull_file(&config));
 	}
 	else {
 		fprintf(stderr, TASK_ERROR, argv[1]);

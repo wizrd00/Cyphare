@@ -1,7 +1,8 @@
 #ifndef CYPHARE_CHECKARGS_H
 #define CYPHARE_CHECKARGS_H
 
-#include <librufshare/types.h>
+#include "librufshare/types.h"
+#include "librufshare/utils/sstr.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -11,21 +12,29 @@
 #define MAXTIMEOUT 16
 #define MAXIPV4SIZE 16
 
-static inline bool check_address_format(char *addr, char *src_ip, unsigned short *src_port)
+static inline bool check_address_format(char *addr, char *dst_ip, unsigned short *dst_port)
 {
 	char *ip = addr;
 	char *port = addr;
 	uint32_t ipnetorder;
 	char *endptr;
 	long tmp_port;
-	while (*(port++)) {if (*port == ':') {*port = '\0'; port++; break;}}
+	if (*addr == '\0')
+		return false;
+	while (*(port++)) {
+		if (*port == ':') {
+			*port = '\0';
+			port++;
+			break;
+		}
+	}
 	if (inet_pton(AF_INET, ip, &ipnetorder) != 1)
 		return false;
 	tmp_port = strtol(port, &endptr, 10);
 	if ((*endptr != '\0') || (tmp_port <= 0) || (tmp_port > 65535))
 		return false;
-	strncpy(src_ip, ip, MAXIPV4SIZE);
-	*src_port = (unsigned short) tmp_port;
+	sstrncpy(dst_ip, ip, MAXIPV4SIZE);
+	*dst_port = (unsigned short) tmp_port;
 	return true;
 }
 
