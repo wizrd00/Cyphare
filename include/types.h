@@ -19,9 +19,6 @@
 #define INV_CHSIZE_ERROR "invalid chunk size, maximum size is 65535 bytes\n\n"
 #define INV_FILE_ERROR "invalid file path %s\n\n"
 #define INV_NAME_ERROR "invalid name %s\n\n"
-#define PTHREAD_CREATE_ERROR "pthread_create() failed\n\n"
-#define PTHREAD_ATTR_ERROR "pthread_attr_init() failed\n\n"
-#define THREAD_BROADCAST_ERROR "broadcast() thread failed\n\n"
 
 #define DEFAULT_SRC_IP "0.0.0.0"
 #define DEFAULT_SRC_PORT 1308

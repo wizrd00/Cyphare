@@ -4,10 +4,14 @@
 #include "types.h"
 #include <stdio.h>
 
-#define CLI_SCAN_LEN_TEXT "[\x1b[36mSCAN\x1b[0m] -> %d host found"
+#define CLI_SCAN_LEN_TEXT "[\x1b[36mSCAN\x1b[0m] -> %d host found\n"
 #define CLI_SCAN_INFO_TEXT "\n[\x1b[32m%d\x1b[0m] -> %.*s at %.*s:%.5hu\n"
 #define CLI_PUSH_PATH_TEXT "[\x1b[36mPUSH\x1b[0m] -> the path '%s' specified\n"
 #define CLI_PUSH_INFO_TEXT "[\x1b[36mPUSH\x1b[0m] -> push the file %.*s to remote host with address %.*s:%.5hu\n"
+#define CLI_PUSH_DONE_TEXT "[\x1b[36mPUSH\x1b[0m] -> push was successful%d\n"
+#define CLI_PUSH_ERROR_TEXT "[\x1b[36mPUSH\x1b[0m] -> push failed with status code %d\n"
+#define CLI_PULL_DONE_TEXT "[\x1b[36mPULL\x1b[0m] -> pull was successful%d\n"
+#define CLI_PULL_ERROR_TEXT "[\x1b[36mPULL\x1b[0m] -> pull failed with status code %d\n"
 
 static inline void cli_scan_len(size_t len)
 {
@@ -36,10 +40,24 @@ static inline void cli_push_info(const char *filename, const char *remote_ip, co
 }
 
 static inline int cli_push_result(int status)
-{}
+{
+	if (status != SUCCESS) {
+		fprintf(stderr, CLI_PUSH_ERROR_TEXT, status);
+		return -1;
+	}
+	printf(CLI_PUSH_DONE_TEXT, status);
+	return 0;
+}
 
 static inline int cli_pull_result(int status)
-{}
+{
+	if (status != SUCCESS) {
+		fprintf(stderr, CLI_PULL_ERROR_TEXT, status);
+		return -1;
+	}
+	printf(CLI_PULL_DONE_TEXT, status);
+	return 0;
+}
 
 static inline void cli_create_bar(void)
 {}

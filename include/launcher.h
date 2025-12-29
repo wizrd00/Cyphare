@@ -7,7 +7,6 @@
 #include <time.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include <pthread.h>
 
 #define LAUNCH_PUSH_FILE_INTERVAL 100000000
 #define LAUNCH_PULL_FILE_INTERVAL 200000000

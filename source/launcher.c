@@ -1,13 +1,5 @@
 #include "launcher.h"
 
-static void *thread_broadcast(void *arg)
-{
-	InitConfig *config = (InitConfig *) arg; 
-	if (broadcast(config) != SUCCESS)
-		fprintf(stderr, THREAD_BROADCAST_ERROR);
-	return arg;
-}
-
 int launch_scanpair(InitConfig *config)
 {
 	int _stat = 0;
@@ -53,10 +45,8 @@ int launch_pull_file(InitConfig *config)
 	struct timespec interval = {.tv_sec = 0, .tv_nsec = LAUNCH_PULL_FILE_INTERVAL};
 	int pull_stat;
 	pid_t pull_pid = fork();
-	pthread_t bc_hdl;
 	char remote_name[MAXNAMESIZE];
 	if (pull_pid == 0) {
-		CHECK_EQUAL(0, pthread_create(&bc_hdl, NULL, thread_broadcast, (void *) config), PTHREAD_CREATE_ERROR);
 		return pull_file(config, remote_name);
 	}
 	cli_create_bar();
