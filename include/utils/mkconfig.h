@@ -5,60 +5,60 @@
 #include "librufshare/utils/sstr.h"
 #include <string.h>
 
-static inline void mkconfig_scan(InitConfig *conf, args_t *args)
+static inline void mkconfig_scan(InitConfig *config, args_t *args)
 {
-	sstrncpy(conf->addrs.local_ip, args->scan.ip, MAXIPV4SIZE);	
-	conf->addrs.local_port = args->scan.port;
-	conf->spt_cast = DEFAULT_SP_CAST;
-	conf->sp_interval = DEFAULT_SP_INTERVAL;
-	conf->sp_trycount = DEFAULT_SP_TRYCOUNT;
+	sstrncpy(config->addrs.local_ip, args->scan.ip, MAXIPV4SIZE);	
+	config->addrs.local_port = args->scan.port;
+	config->spt_cast = DEFAULT_SP_CAST;
+	config->sp_interval = DEFAULT_SP_INTERVAL;
+	config->sp_trycount = DEFAULT_SP_TRYCOUNT;
 	return;
 }
 
-static inline void mkconfig_push(InitConfig *conf, args_t *args)
+static inline void mkconfig_push(InitConfig *config, args_t *args)
 {
-	conf->chsize = args->push.chsize;
-	conf->pchsize = 0;
-	conf->chcount = 0;
-	conf->seq = 0;
-	extract_file_name(conf->addrs.filename, args->push.path, MAXFILENAMESIZE);
-	sstrncpy(conf->addrs.name, args->push.name, MAXNAMESIZE);
-	sstrncpy(conf->addrs.local_ip, args->push.src_ip, MAXIPV4SIZE);
-	sstrncpy(conf->addrs.remote_ip, args->push.dst_ip, MAXIPV4SIZE);
-	conf->addrs.local_port = args->push.src_port;
-	conf->addrs.remote_port = args->push.dst_port;
-	conf->hst_send = DEFAULT_HST_SEND;
-	conf->hst_recv = DEFAULT_HST_RECV;
-	conf->tft_flow = DEFAULT_TFT_FLOW;
-	conf->tft_recv = DEFAULT_TFT_RECV;
-	conf->tft_data = DEFAULT_TFT_DATA;
-	conf->vft_send = DEFAULT_VFT_SEND;
-	conf->vft_recv = DEFAULT_VFT_RECV;
-	conf->tf_trycount = DEFAULT_TF_TRYCOUNT;
+	config->chsize = args->push.chsize;
+	config->pchsize = 0;
+	config->chcount = 0;
+	config->seq = 0;
+	extract_file_name(config->addrs.filename, args->push.path, MAXFILENAMESIZE);
+	sstrncpy(config->addrs.name, args->push.name, MAXNAMESIZE);
+	sstrncpy(config->addrs.local_ip, args->push.src_ip, MAXIPV4SIZE);
+	sstrncpy(config->addrs.remote_ip, args->push.dst_ip, MAXIPV4SIZE);
+	config->addrs.local_port = args->push.src_port;
+	config->addrs.remote_port = args->push.dst_port;
+	config->hst_send = DEFAULT_HST_SEND;
+	config->hst_recv = DEFAULT_HST_RECV;
+	config->tft_flow = DEFAULT_TFT_FLOW;
+	config->tft_recv = DEFAULT_TFT_RECV;
+	config->tft_data = DEFAULT_TFT_DATA;
+	config->vft_send = DEFAULT_VFT_SEND;
+	config->vft_recv = DEFAULT_VFT_RECV;
+	config->tf_trycount = DEFAULT_TF_TRYCOUNT;
 	return;
 }
 
-static inline void mkconfig_pull(InitConfig *conf, args_t *args)
+static inline void mkconfig_pull(InitConfig *config, args_t *args)
 {
-	conf->chsize = 0;
-	conf->pchsize = 0;
-	conf->chcount = 0;
-	conf->seq = 0;
-	sstrncpy(conf->addrs.name, args->pull.name, MAXNAMESIZE);
-	sstrncpy(conf->addrs.local_ip, args->pull.ip, MAXIPV4SIZE);
-	sstrncpy(conf->addrs.remote_ip, DEFAULT_DST_IP, MAXIPV4SIZE);
-	conf->addrs.local_port = args->pull.port;
-	conf->addrs.remote_port = DEFAULT_DST_PORT;
-	conf->hst_send = DEFAULT_HST_SEND;
-	conf->hst_recv = DEFAULT_HST_RECV;
-	conf->tft_flow = DEFAULT_TFT_FLOW;
-	conf->tft_recv = DEFAULT_TFT_RECV;
-	conf->tft_data = DEFAULT_TFT_DATA;
-	conf->vft_send = DEFAULT_VFT_SEND;
-	conf->vft_recv = DEFAULT_VFT_RECV;
-	conf->bc_interval = DEFAULT_BC_INTERVAL;
-	conf->tf_trycount = DEFAULT_TF_TRYCOUNT;
-	conf->bc_trycount = DEFAULT_BC_TRYCOUNT;
+	config->chsize = 0;
+	config->pchsize = 0;
+	config->chcount = 0;
+	config->seq = 0;
+	sstrncpy(config->addrs.name, args->pull.name, MAXNAMESIZE);
+	sstrncpy(config->addrs.local_ip, args->pull.ip, MAXIPV4SIZE);
+	sstrncpy(config->addrs.remote_ip, DEFAULT_DST_IP, MAXIPV4SIZE);
+	config->addrs.local_port = args->pull.port;
+	config->addrs.remote_port = DEFAULT_DST_PORT;
+	config->hst_send = DEFAULT_HST_SEND;
+	config->hst_recv = DEFAULT_HST_RECV;
+	config->tft_flow = DEFAULT_TFT_FLOW;
+	config->tft_recv = DEFAULT_TFT_RECV;
+	config->tft_data = DEFAULT_TFT_DATA;
+	config->vft_send = DEFAULT_VFT_SEND;
+	config->vft_recv = DEFAULT_VFT_RECV;
+	config->bc_interval = DEFAULT_BC_INTERVAL;
+	config->tf_trycount = DEFAULT_TF_TRYCOUNT;
+	config->bc_trycount = DEFAULT_BC_TRYCOUNT;
 	return;
 }
 

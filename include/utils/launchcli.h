@@ -35,10 +35,16 @@ static inline void cli_push_info(const char *filename, const char *remote_ip, co
 	return;
 }
 
-static inline int cli_push_result(int status);
+static inline int cli_push_result(int status)
+{}
 
-static inline void cli_create_bar(void);
+static inline int cli_pull_result(int status)
+{}
 
-static inline void cli_update_bar(size_t seq);
+static inline void cli_create_bar(void)
+{}
+
+static inline void cli_update_bar(size_t seq)
+{}
 
 #endif

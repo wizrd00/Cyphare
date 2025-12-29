@@ -2,6 +2,7 @@
 #define CYPHARE_H
 
 #include "types.h"
+#include "launcher.h"
 #include "utils/checkargs.h"
 #include "utils/argparse.h"
 #include "utils/mkconfig.h"

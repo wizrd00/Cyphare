@@ -1,6 +1,6 @@
 #include "cyphare.h"
 
-static char help[] =
+static const char help[] =
 	"Cyphare version" " " VERSION " " "help message :\n"
 	"source code in https://github.com/wizrd00/Cyphare.git\n"
 	"./cyphare TASK [OPTIONS]\n"

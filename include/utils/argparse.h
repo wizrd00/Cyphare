@@ -10,8 +10,6 @@
 #define PUSHOPTSTR ":c:f:n:s:d:"
 #define PULLOPTSTR ":n:s:"
 
-extern char help[];
-
 static inline int scan_argparse(int argc, char *argv[], args_t *args)
 {
 	int opt;
@@ -74,13 +72,13 @@ static inline int push_argparse(int argc, char *argv[], args_t *args)
 				break;
 			case 's' :
 				CHECK_SRCADDR(optarg, args->push.src_ip, &(args->push.src_port));
-				args->push.src_ip = true;
-				args->push.src_port = true;
+				args->push.src_ip_spec = true;
+				args->push.src_port_spec = true;
 				break;
 			case 'd' :
 				CHECK_DSTADDR(optarg, args->push.dst_ip, &(args->push.dst_port));
-				args->push.dst_ip = true;
-				args->push.dst_port = true;
+				args->push.dst_ip_spec = true;
+				args->push.dst_port_spec = true;
 				break;
 			case ':' :
 				fprintf(stderr, MISSED_ERROR, optopt);
@@ -122,8 +120,8 @@ static int pull_argparse(int argc, char *argv[], args_t *args)
 				break;
 			case 's' :
 				CHECK_SRCADDR(optarg, args->pull.ip, &(args->pull.port));
-				args->pull.src_ip = true;
-				args->pull.src_port = true;
+				args->pull.ip_spec = true;
+				args->pull.port_spec = true;
 				break;
 			case ':' :
 				fprintf(stderr, MISSED_ERROR, optopt);
