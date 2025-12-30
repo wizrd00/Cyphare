@@ -9,7 +9,7 @@ static inline void mkconfig_scan(InitConfig *config, args_t *args)
 {
 	sstrncpy(config->addrs.local_ip, args->scan.ip, MAXIPV4SIZE);	
 	config->addrs.local_port = args->scan.port;
-	config->spt_cast = DEFAULT_SP_CAST;
+	config->spt_cast = DEFAULT_SPT_CAST;
 	config->sp_interval = DEFAULT_SP_INTERVAL;
 	config->sp_trycount = DEFAULT_SP_TRYCOUNT;
 	return;
@@ -56,6 +56,7 @@ static inline void mkconfig_pull(InitConfig *config, args_t *args)
 	config->tft_data = DEFAULT_TFT_DATA;
 	config->vft_send = DEFAULT_VFT_SEND;
 	config->vft_recv = DEFAULT_VFT_RECV;
+	config->bct_cast = DEFAULT_BCT_CAST;
 	config->bc_interval = DEFAULT_BC_INTERVAL;
 	config->tf_trycount = DEFAULT_TF_TRYCOUNT;
 	config->bc_trycount = DEFAULT_BC_TRYCOUNT;

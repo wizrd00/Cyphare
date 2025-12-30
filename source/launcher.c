@@ -4,19 +4,9 @@ int launch_scanpair(InitConfig *config)
 {
 	int _stat = 0;
 	PairInfo *info;
-	size_t len;
+	size_t len = 0;
 	int scan_stat;
-	pid_t scan_pid = fork();
-	if (scan_pid == 0)
-		return scanpair(config, info, &len);
-	while (waitpid(scan_pid, &scan_stat, WNOHANG) == 0) {
-		cli_scan_len(len);
-		sleep(1);
-	}
-	if (scan_stat == SUCCESS)
-		cli_scan_info(info, len);
-	else
-		_stat = -1;
+	pthread_t handle;
 	free(info);
 	return _stat;
 }
@@ -47,11 +37,12 @@ int launch_pull_file(InitConfig *config)
 	pid_t pull_pid = fork();
 	char remote_name[MAXNAMESIZE];
 	if (pull_pid == 0) {
-		return pull_file(config, remote_name);
+		fprintf(stderr, "return code = %d\n", pull_file(config, remote_name));
+		return -1;
 	}
-	cli_create_bar();
+	//cli_create_bar();
 	while (waitpid(pull_pid, &pull_stat, WNOHANG) == 0) {
-		cli_update_bar((size_t ) conf->seq);
+		//cli_update_bar((size_t ) conf->seq);
 		nanosleep(&interval, NULL);
 	}
 	return _stat = cli_pull_result(pull_stat);
