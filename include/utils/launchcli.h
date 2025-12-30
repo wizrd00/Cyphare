@@ -12,6 +12,9 @@
 #define CLI_PUSH_ERROR_TEXT "[\x1b[36mPUSH\x1b[0m] -> push failed with status code %d\n"
 #define CLI_PULL_DONE_TEXT "[\x1b[36mPULL\x1b[0m] -> pull was successful%d\n"
 #define CLI_PULL_ERROR_TEXT "[\x1b[36mPULL\x1b[0m] -> pull failed with status code %d\n"
+#define CLI_BAR_CONTEXT_TEXT "progress -> [%lu]"
+
+#define CLI_BAR_SYMBOL_COUNT 32
 
 static inline void cli_scan_len(size_t len)
 {
@@ -60,9 +63,16 @@ static inline int cli_pull_result(int status)
 }
 
 static inline void cli_create_bar(void)
-{}
+{
+	printf(CLI_BAR_CONTEXT_TEXT, 0);
+	putchar('\r');
+	return;
+}
 
 static inline void cli_update_bar(size_t seq)
-{}
+{
+	printf(CLI_BAR_CONTEXT_TEXT, (unsigned long) seq);	
+	putchar('\r');
+}
 
 #endif
