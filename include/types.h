@@ -40,14 +40,6 @@
 #define DEFAULT_SP_TRYCOUNT 4
 #define DEFAULT_BC_TRYCOUNT 4
 
-#undef CHECK_EQUAL
-#define CHECK_EQUAL(val0, val1, err)\
-	do {if (val0 != val1) {fprintf(stderr, err); return -1;}} while (0)
-
-#undef CHECK_NOTEQUAL
-#define CHECK_NOTEQUAL(val0, val1, err)\
-	do {if (val0 == val1) {fprintf(stderr, err); return -1;}} while (0)
-
 #define CHECK_ARGC(val)\
 	do {if (val < 2) {fprintf(stderr, help); return 1;}} while (0)
 
@@ -98,6 +90,12 @@ typedef union {
 		bool port_spec;
 	} pull;
 } args_t;
+
+typedef struct {} scanparams_t
+
+typedef struct {} pushparams_t
+
+typedef struct {} pullparams_t
 
 extern const char help[];
 
