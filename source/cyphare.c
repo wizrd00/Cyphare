@@ -27,19 +27,19 @@ int main(int argc, char *argv[])
 		if (scan_argparse(argc, argv, &args) != 0)
 			return 1;
 		mkconfig_scan(&config, &args);
-		tryexec(launch_scanpair(&config));
+		tryexec(launch_scanpair(&config, DEFAULT_LOG_PATH));
 	}
 	else if (strcmp(argv[1], PUSHSTR) == 0) {
 		if (push_argparse(argc, argv, &args) != 0)
 			return 1;
 		mkconfig_push(&config, &args);
-		tryexec(launch_push_file(&config, args.push.path));
+		tryexec(launch_push_file(&config, args.push.path, DEFAULT_LOG_PATH));
 	}
 	else if (strcmp(argv[1], PULLSTR) == 0) {
 		if (pull_argparse(argc, argv, &args) != 0)
 			return 1;
 		mkconfig_pull(&config, &args);
-		tryexec(launch_pull_file(&config));
+		tryexec(launch_pull_file(&config, DEFAULT_LOG_PATH));
 	}
 	else {
 		fprintf(stderr, TASK_ERROR, argv[1]);

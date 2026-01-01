@@ -1,6 +1,6 @@
 CYPHARE := cyphare.elf
 CC := pcc
-CFLAGS := -std=c99 -O3 -g -Wc,-Werror=implicit-function-declaration,-Werror=missing-prototypes,-Werror=pointer-sign,-Werror=sign-compare,-Werror=strict-prototypes,-Werror=shadow
+CFLAGS := -std=c99 -O3 -g -Wc,-Werror=implicit-function-declaration,-Werror=missing-prototypes,-Werror=pointer-sign,-Werror=sign-compare,-Werror=strict-prototypes,-Werror=shadow -pthread
 #CFLAGS_PIC := -shared -fPIC 
 
 SRC_DIR := source

@@ -20,6 +20,7 @@
 #define INV_FILE_ERROR "invalid file path %s\n\n"
 #define INV_NAME_ERROR "invalid name %s\n\n"
 
+#define DEFAULT_LOG_PATH "./"
 #define DEFAULT_SRC_IP "0.0.0.0"
 #define DEFAULT_SRC_PORT 1308
 #define DEFAULT_DST_IP "255.255.255.255"
@@ -91,11 +92,24 @@ typedef union {
 	} pull;
 } args_t;
 
-typedef struct {} scanparams_t
-
-typedef struct {} pushparams_t
-
-typedef struct {} pullparams_t
+typedef union {
+	struct {
+		InitConfig *config;
+		const char *path;
+		status_t _stat;
+	} push;
+	struct {
+		InitConfig *config;
+		char *remote_name;
+		status_t _stat;
+	} pull;
+	struct {
+		InitConfig *config;
+		PairInfo *info;
+		size_t *len;
+		status_t _stat;
+	} scan;
+} params_t;
 
 extern const char help[];
 
