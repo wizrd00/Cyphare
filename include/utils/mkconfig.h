@@ -5,16 +5,6 @@
 #include "librufshare/utils/sstr.h"
 #include <string.h>
 
-static inline void mkconfig_scan(InitConfig *config, args_t *args)
-{
-	sstrncpy(config->addrs.local_ip, args->scan.ip, MAXIPV4SIZE);	
-	config->addrs.local_port = args->scan.port;
-	config->spt_cast = DEFAULT_SPT_CAST;
-	config->sp_interval = DEFAULT_SP_INTERVAL;
-	config->sp_trycount = DEFAULT_SP_TRYCOUNT;
-	return;
-}
-
 static inline void mkconfig_push(InitConfig *config, args_t *args)
 {
 	config->chsize = args->push.chsize;
@@ -60,6 +50,16 @@ static inline void mkconfig_pull(InitConfig *config, args_t *args)
 	config->bc_interval = DEFAULT_BC_INTERVAL;
 	config->tf_trycount = DEFAULT_TF_TRYCOUNT;
 	config->bc_trycount = DEFAULT_BC_TRYCOUNT;
+	return;
+}
+
+static inline void mkconfig_scan(InitConfig *config, args_t *args)
+{
+	sstrncpy(config->addrs.local_ip, args->scan.ip, MAXIPV4SIZE);	
+	config->addrs.local_port = args->scan.port;
+	config->spt_cast = DEFAULT_SPT_CAST;
+	config->sp_interval = DEFAULT_SP_INTERVAL;
+	config->sp_trycount = DEFAULT_SP_TRYCOUNT;
 	return;
 }
 
