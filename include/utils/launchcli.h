@@ -11,8 +11,8 @@
 #define CLI_PULL_INFO_TEXT "[\x1b[36mPULL\x1b[0m] -> pull the file with local host address %.*s:%-5hu\n"
 #define CLI_PULL_DONE_TEXT "[\x1b[36mPULL\x1b[0m] -> pull was successful%d\n"
 #define CLI_PULL_ERROR_TEXT "[\x1b[31mPULL\x1b[0m] -> pull failed with status code %d\n"
-#define CLI_SCAN_INFO_TEXT "[\x1b[36mSCAN\x1b[0m] -> %d host found\n"
-#define CLI_SCAN_DONE_TEXT "[\x1b[32m%d\x1b[0m] -> %.*s at %.*s:%-5hu\n"
+#define CLI_SCAN_INFO_TEXT "[\x1b[36mSCAN\x1b[0m] -> %d host found"
+#define CLI_SCAN_DONE_TEXT "[\x1b[32m%d\x1b[0m] -> %s at %s:%-5hu\n"
 #define CLI_SCAN_ERROR_TEXT "[\x1b[31mSCAN\x1b[0m] -> scan pairs failed with status code %d\n"
 #define CLI_BAR_CONTEXT_TEXT "progress -> [%lu/%lu]"
 
@@ -60,6 +60,7 @@ static inline void cli_scan_info(size_t len)
 {
 	printf(CLI_SCAN_INFO_TEXT, len);
 	putchar('\r');
+	fflush(stdout);
 	return;
 }
 
@@ -69,8 +70,9 @@ static inline int cli_scan_result(status_t status, PairInfo *info, size_t len)
 		fprintf(stderr, CLI_SCAN_ERROR_TEXT, (int) status);
 		return -1;
 	}
+	putchar('\n');
 	for (int i = 0; i < len; i++)
-		printf(CLI_SCAN_INFO_TEXT, MAXNAMESIZE, info[i].name, MAXIPV4SIZE, info[i].addr.ip, info[i].addr.port);	
+		printf(CLI_SCAN_DONE_TEXT, i, info[i].name, info[i].ip, info[i].port);	
 	return 0;
 }
 
@@ -85,6 +87,7 @@ static inline void cli_update_bar(size_t x, size_t y)
 {
 	printf(CLI_BAR_CONTEXT_TEXT, x, y);	
 	putchar('\r');
+	fflush(stdout);
 }
 
 #endif

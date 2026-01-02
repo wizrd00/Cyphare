@@ -1,3 +1,5 @@
 *.swp*
 *.elf
 *.sh
+*.py
+showlog.c

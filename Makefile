@@ -10,7 +10,7 @@ LIB_DIR := library
 LIBRUFSHARE_HDR := include/librufshare
 
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
-HDR_FILES := $(wildcard $(INC_DIR)/*.h, $(INC_DIR)/utils/*.h)
+HDR_FILES := $(wildcard $(INC_DIR)/*.h) $(wildcard $(INC_DIR)/utils/*.h)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(BIN_DIR)/%.o, $(SRC_FILES))
 
 LIB_FLAGS := -Wl,--library-path=$(LIB_DIR),-rpath=$(LIB_DIR)

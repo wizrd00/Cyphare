@@ -21,10 +21,13 @@
 #define INV_NAME_ERROR "invalid name %s\n\n"
 
 #define DEFAULT_LOG_PATH "./"
+#define DEFAULT_PULL_FILENAME "empty"
 #define DEFAULT_SRC_IP "0.0.0.0"
-#define DEFAULT_SRC_PORT 1308
 #define DEFAULT_DST_IP "255.255.255.255"
-#define DEFAULT_DST_PORT 1308
+#define DEFAULT_PUSH_SRC_PORT 1308
+#define DEFAULT_PUSH_DST_PORT 1307
+#define DEFAULT_PULL_SRC_PORT 1307
+#define DEFAULT_PULL_DST_PORT 1308
 #define DEFAULT_CHUNK_SIZE 0xffff
 #define DEFAULT_HST_SEND 8000
 #define DEFAULT_HST_RECV 8000
@@ -34,7 +37,7 @@
 #define DEFAULT_VFT_SEND 8000
 #define DEFAULT_VFT_RECV 8000
 #define DEFAULT_BCT_CAST 1000
-#define DEFAULT_SPT_CAST 1000
+#define DEFAULT_SPT_CAST 2000
 #define DEFAULT_BC_INTERVAL 2
 #define DEFAULT_SP_INTERVAL 8
 #define DEFAULT_TF_TRYCOUNT 4
@@ -105,7 +108,7 @@ typedef union {
 	} pull;
 	struct {
 		InitConfig *config;
-		PairInfo *info;
+		PairInfo **info;
 		size_t *len;
 		status_t _stat;
 	} scan;

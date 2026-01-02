@@ -90,7 +90,7 @@ int launch_scanpair(InitConfig *config, const char *logpath)
 	pthread_t hdl;
 	struct timespec abstime = {.tv_sec = 0, .tv_nsec = 0};
 	param.scan.config = config;
-	param.scan.info = info;
+	param.scan.info = &info;
 	param.scan.len = &len;
 	if (launch_initiate(logpath) == -1)
 		return -1;
@@ -103,5 +103,7 @@ int launch_scanpair(InitConfig *config, const char *logpath)
 			return -1;
 		abstime.tv_sec += LAUNCH_SCAN_PAIR_INTERVAL;
 	}
-	return _stat = cli_scan_result(param.scan._stat, info, len);
+	_stat = cli_scan_result(param.scan._stat, info, len);
+	free(info);
+	return _stat;
 }

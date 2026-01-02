@@ -34,11 +34,12 @@ static inline void mkconfig_pull(InitConfig *config, args_t *args)
 	config->pchsize = 0;
 	config->chcount = 0;
 	config->seq = 0;
+	sstrncpy(config->addrs.filename, DEFAULT_PULL_FILENAME, MAXFILENAMESIZE);
 	sstrncpy(config->addrs.name, args->pull.name, MAXNAMESIZE);
 	sstrncpy(config->addrs.local_ip, args->pull.ip, MAXIPV4SIZE);
 	sstrncpy(config->addrs.remote_ip, DEFAULT_DST_IP, MAXIPV4SIZE);
 	config->addrs.local_port = args->pull.port;
-	config->addrs.remote_port = DEFAULT_DST_PORT;
+	config->addrs.remote_port = DEFAULT_PULL_DST_PORT;
 	config->hst_send = DEFAULT_HST_SEND;
 	config->hst_recv = DEFAULT_HST_RECV;
 	config->tft_flow = DEFAULT_TFT_FLOW;
@@ -55,7 +56,7 @@ static inline void mkconfig_pull(InitConfig *config, args_t *args)
 
 static inline void mkconfig_scan(InitConfig *config, args_t *args)
 {
-	sstrncpy(config->addrs.local_ip, args->scan.ip, MAXIPV4SIZE);	
+	sstrncpy(config->addrs.local_ip, "0.0.0.0", MAXIPV4SIZE);	
 	config->addrs.local_port = args->scan.port;
 	config->spt_cast = DEFAULT_SPT_CAST;
 	config->sp_interval = DEFAULT_SP_INTERVAL;

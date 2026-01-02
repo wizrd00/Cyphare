@@ -6,42 +6,9 @@
 #include "librufshare/utils/sstr.h"
 #include <getopt.h>
 
-#define SCANOPTSTR ":s:"
 #define PUSHOPTSTR ":c:f:n:s:d:"
 #define PULLOPTSTR ":n:s:"
-
-static inline int scan_argparse(int argc, char *argv[], args_t *args)
-{
-	int opt;
-	optind = 2;
-	args->scan.ip_spec = false;
-	args->scan.port_spec = false;
-	while ((opt = getopt(argc, argv, SCANOPTSTR)) != -1)
-		switch (opt) {
-			case 's' :
-				CHECK_SRCADDR(optarg, args->scan.ip, &(args->scan.port));
-				args->scan.ip_spec = true;
-				args->scan.port_spec = true;
-				break;
-			case ':' :
-				fprintf(stderr, MISSED_ERROR, optopt);
-				fprintf(stderr, help);
-				return -1;
-			case '?' :
-				fprintf(stderr, UNKNOWN_ERROR, optopt);
-				fprintf(stderr, help);
-				return -1;
-			default :
-				fprintf(stderr, GLOBAL_ERROR);
-				fprintf(stderr, help);
-				return -1;
-		}
-	if (!args->scan.ip_spec)
-		sstrncpy(args->scan.ip, DEFAULT_SRC_IP, MAXIPV4SIZE);
-	if (!args->scan.port_spec)
-		args->scan.port = DEFAULT_SRC_PORT;
-	return 0;
-}
+#define SCANOPTSTR ":s:"
 
 static inline int push_argparse(int argc, char *argv[], args_t *args)
 {
@@ -100,7 +67,7 @@ static inline int push_argparse(int argc, char *argv[], args_t *args)
 	if (!args->push.src_ip_spec)
 		sstrncpy(args->push.src_ip, DEFAULT_SRC_IP, MAXIPV4SIZE);
 	if (!args->push.src_port_spec)
-		args->push.src_port = DEFAULT_SRC_PORT;
+		args->push.src_port = DEFAULT_PUSH_SRC_PORT;
 	return 0;
 }
 
@@ -141,7 +108,40 @@ static int pull_argparse(int argc, char *argv[], args_t *args)
 	if (!args->pull.ip_spec)
 		sstrncpy(args->pull.ip, DEFAULT_SRC_IP, MAXIPV4SIZE);
 	if (!args->pull.port_spec)
-		args->pull.port = DEFAULT_SRC_PORT;
+		args->pull.port = DEFAULT_PULL_SRC_PORT;
+	return 0;
+}
+
+static inline int scan_argparse(int argc, char *argv[], args_t *args)
+{
+	int opt;
+	optind = 2;
+	args->scan.ip_spec = false;
+	args->scan.port_spec = false;
+	while ((opt = getopt(argc, argv, SCANOPTSTR)) != -1)
+		switch (opt) {
+			case 's' :
+				CHECK_SRCADDR(optarg, args->scan.ip, &(args->scan.port));
+				args->scan.ip_spec = true;
+				args->scan.port_spec = true;
+				break;
+			case ':' :
+				fprintf(stderr, MISSED_ERROR, optopt);
+				fprintf(stderr, help);
+				return -1;
+			case '?' :
+				fprintf(stderr, UNKNOWN_ERROR, optopt);
+				fprintf(stderr, help);
+				return -1;
+			default :
+				fprintf(stderr, GLOBAL_ERROR);
+				fprintf(stderr, help);
+				return -1;
+		}
+	if (!args->scan.ip_spec)
+		sstrncpy(args->scan.ip, DEFAULT_SRC_IP, MAXIPV4SIZE);
+	if (!args->scan.port_spec)
+		args->scan.port = DEFAULT_PUSH_SRC_PORT;
 	return 0;
 }
 

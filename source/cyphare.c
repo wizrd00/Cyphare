@@ -14,7 +14,7 @@ static const char help[] =
 	"\t\t\t[-s <source-ip:source-port>=0.0.0.0:1308]  [-d <destination-ip:destination-port>]\n"
 	"\n\tpull" "    " "broadcasts in the network that it's ready to receive file\n"
 	"\t\tOPTIONS :\n"
-	"\t\t\t[-n <name>=random]  [-s <source-ip:source-port>=0.0.0.0:1308]\n"
+	"\t\t\t[-n <name>=random]  [-s <source-ip:source-port>=0.0.0.0:1307]\n"
 	"\n";
 
 int main(int argc, char *argv[])
