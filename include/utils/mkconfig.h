@@ -2,6 +2,7 @@
 #define CYPHARE_MKCONFIG_H
 
 #include "types.h"
+#include "librufshare/utils/fname.h"
 #include "librufshare/utils/sstr.h"
 #include <string.h>
 
@@ -11,7 +12,7 @@ static inline void mkconfig_push(InitConfig *config, args_t *args)
 	config->pchsize = 0;
 	config->chcount = 0;
 	config->seq = 0;
-	extract_file_name(config->addrs.filename, args->push.path, MAXFILENAMESIZE);
+	sstrncpy(config->addrs.filename, extract_file_name(args->push.path, strlen(args->push.path) + 1), MAXFILENAMESIZE);
 	sstrncpy(config->addrs.name, args->push.name, MAXNAMESIZE);
 	sstrncpy(config->addrs.local_ip, args->push.src_ip, MAXIPV4SIZE);
 	sstrncpy(config->addrs.remote_ip, args->push.dst_ip, MAXIPV4SIZE);
@@ -56,7 +57,7 @@ static inline void mkconfig_pull(InitConfig *config, args_t *args)
 
 static inline void mkconfig_scan(InitConfig *config, args_t *args)
 {
-	sstrncpy(config->addrs.local_ip, "0.0.0.0", MAXIPV4SIZE);	
+	sstrncpy(config->addrs.local_ip, args->scan.ip, MAXIPV4SIZE);	
 	config->addrs.local_port = args->scan.port;
 	config->spt_cast = DEFAULT_SPT_CAST;
 	config->sp_interval = DEFAULT_SP_INTERVAL;

@@ -54,7 +54,7 @@ static inline bool check_file_path(char *file, bool check_size)
 	struct stat statbuf;
 	if (stat(file, &statbuf) == -1)
 		return false;
-	if (statbuf.st_mode != S_IFREG)
+	if (!S_ISREG(statbuf.st_mode))
 		return false;
 	if (check_size)
 		if (statbuf.st_size == 0)

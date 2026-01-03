@@ -25,7 +25,7 @@ $(CYPHARE) : $(OBJ_FILES) $(LIBRUFSHARE) $(HDR_FILES)
 	@/usr/bin/echo -e $(POINTER_SYM) "\e[96mlinking modules into" $@ "\e[0m"
 	$(CC) $(CFLAGS) -o $@ $(LIBRUFSHARE) $(OBJ_FILES)
 	@/usr/bin/echo -e $(POINTER_SYM) "\e[93mstrip" $@ "\e[0m"
-	#@strip $@
+	@strip $@
 
 $(BIN_DIR)/%.o : $(SRC_DIR)/%.c $(INC_DIR)/%.h $(HDR_FILES)
 	@/usr/bin/echo -e $(POINTER_SYM) "\e[93mcompiling module" $< "\e[0m"
