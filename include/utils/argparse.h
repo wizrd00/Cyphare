@@ -23,43 +23,39 @@ static inline int push_argparse(int argc, char *argv[], args_t *args)
 	args->push.dst_port_spec = false;
 	while ((opt = getopt(argc, argv, PUSHOPTSTR)) != -1)
 		switch (opt) {
-			case 'c' :
-				CHECK_CHUNKSIZE(optarg, &(args->push.chsize));
-				args->push.chsize_spec = true;
-				break;
-			case 'f' :
-				CHECK_FILE(optarg, true);
-				args->push.path = optarg;
-				args->push.path_spec = true;
-				break;
-			case 'n' :
-				CHECK_NAME(optarg);
-				sstrncpy(args->push.name, optarg, MAXNAMESIZE);
-				args->push.name_spec = true;
-				break;
-			case 's' :
-				CHECK_SRCADDR(optarg, args->push.src_ip, &(args->push.src_port));
-				args->push.src_ip_spec = true;
-				args->push.src_port_spec = true;
-				break;
-			case 'd' :
-				CHECK_DSTADDR(optarg, args->push.dst_ip, &(args->push.dst_port));
-				args->push.dst_ip_spec = true;
-				args->push.dst_port_spec = true;
-				break;
-			case ':' :
-				fprintf(stderr, MISSED_ERROR, optopt);
-				fprintf(stderr, help);
-				return -1;
-			case '?' :
-				fprintf(stderr, UNKNOWN_ERROR, optopt);
-				fprintf(stderr, help);
-				return -1;
-			default :
-				fprintf(stderr, GLOBAL_ERROR);
-				fprintf(stderr, help);
-				return -1;
+		case 'c' :
+			CHECK_CHUNKSIZE(optarg, &(args->push.chsize));
+			args->push.chsize_spec = true;
+			break;
+		case 'f' :
+			CHECK_FILE(optarg, true);
+			args->push.path = optarg;
+			args->push.path_spec = true;
+			break;
+		case 'n' :
+			CHECK_NAME(optarg);
+			sstrncpy(args->push.name, optarg, MAXNAMESIZE);
+			args->push.name_spec = true;
+			break;
+		case 's' :
+			CHECK_SRCADDR(optarg, args->push.src_ip, &(args->push.src_port));
+			args->push.src_ip_spec = true;
+			args->push.src_port_spec = true;
+			break;
+		case 'd' :
+			CHECK_DSTADDR(optarg, args->push.dst_ip, &(args->push.dst_port));
+			args->push.dst_ip_spec = true;
+			args->push.dst_port_spec = true;
+			break;
+		case ':' :
+			GLOBAL_ERROR_EXIT(MISSED_ERROR, optopt);
+		case '?' :
+			GLOBAL_ERROR_EXIT(UNKNOWN_ERROR, optopt);
+		default :
+			GLOBAL_ERROR_EXIT(GLOBAL_ERROR);
 		}
+	if (!args->push.path_spec)
+		GLOBAL_ERROR_EXIT(INV_FILE_ERROR, "");
 	if (!args->push.chsize_spec)
 		args->push.chsize = DEFAULT_CHUNK_SIZE;
 	if (!args->push.name_spec)
@@ -80,28 +76,22 @@ static int pull_argparse(int argc, char *argv[], args_t *args)
 	args->pull.port_spec = false;
 	while ((opt = getopt(argc, argv, PULLOPTSTR)) != -1)
 		switch (opt) {
-			case 'n' :
-				CHECK_NAME(optarg);
-				sstrncpy(args->pull.name, optarg, MAXNAMESIZE);
-				args->pull.name_spec = true;
-				break;
-			case 's' :
-				CHECK_SRCADDR(optarg, args->pull.ip, &(args->pull.port));
-				args->pull.ip_spec = true;
-				args->pull.port_spec = true;
-				break;
-			case ':' :
-				fprintf(stderr, MISSED_ERROR, optopt);
-				fprintf(stderr, help);
-				return -1;
-			case '?' :
-				fprintf(stderr, UNKNOWN_ERROR, optopt);
-				fprintf(stderr, help);
-				return -1;
-			default :
-				fprintf(stderr, GLOBAL_ERROR);
-				fprintf(stderr, help);
-				return -1;
+		case 'n' :
+			CHECK_NAME(optarg);
+			sstrncpy(args->pull.name, optarg, MAXNAMESIZE);
+			args->pull.name_spec = true;
+			break;
+		case 's' :
+			CHECK_SRCADDR(optarg, args->pull.ip, &(args->pull.port));
+			args->pull.ip_spec = true;
+			args->pull.port_spec = true;
+			break;
+		case ':' :
+			GLOBAL_ERROR_EXIT(MISSED_ERROR, optopt);
+		case '?' :
+			GLOBAL_ERROR_EXIT(UNKNOWN_ERROR, optopt);
+		default :
+			GLOBAL_ERROR_EXIT(GLOBAL_ERROR);
 		}
 	if (!args->pull.name_spec)
 		mkrandname(args->pull.name);
@@ -120,23 +110,17 @@ static inline int scan_argparse(int argc, char *argv[], args_t *args)
 	args->scan.port_spec = false;
 	while ((opt = getopt(argc, argv, SCANOPTSTR)) != -1)
 		switch (opt) {
-			case 's' :
-				CHECK_SRCADDR(optarg, args->scan.ip, &(args->scan.port));
-				args->scan.ip_spec = true;
-				args->scan.port_spec = true;
-				break;
-			case ':' :
-				fprintf(stderr, MISSED_ERROR, optopt);
-				fprintf(stderr, help);
-				return -1;
-			case '?' :
-				fprintf(stderr, UNKNOWN_ERROR, optopt);
-				fprintf(stderr, help);
-				return -1;
-			default :
-				fprintf(stderr, GLOBAL_ERROR);
-				fprintf(stderr, help);
-				return -1;
+		case 's' :
+			CHECK_SRCADDR(optarg, args->scan.ip, &(args->scan.port));
+			args->scan.ip_spec = true;
+			args->scan.port_spec = true;
+			break;
+		case ':' :
+			GLOBAL_ERROR_EXIT(MISSED_ERROR, optopt);
+		case '?' :
+			GLOBAL_ERROR_EXIT(UNKNOWN_ERROR, optopt);
+		default :
+			GLOBAL_ERROR_EXIT(GLOBAL_ERROR);
 		}
 	if (!args->scan.ip_spec)
 		sstrncpy(args->scan.ip, DEFAULT_SRC_IP, MAXIPV4SIZE);

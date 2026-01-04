@@ -44,6 +44,9 @@
 #define DEFAULT_SP_TRYCOUNT 4
 #define DEFAULT_BC_TRYCOUNT 4
 
+#define GLOBAL_ERROR_EXIT(...)\
+	do {fprintf(stderr, __VA_ARGS__); fprintf(stderr, help); return -1;} while (0)
+
 #define CHECK_ARGC(val)\
 	do {if (val < 2) {fprintf(stderr, help); return 1;}} while (0)
 
