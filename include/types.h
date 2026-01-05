@@ -5,7 +5,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 
-#define VERSION "0.0.1"
+#define VERSION "0.1.0"
 #define SCANSTR "scan"
 #define PUSHSTR "push"
 #define PULLSTR "pull"
@@ -103,17 +103,20 @@ typedef union {
 		InitConfig *config;
 		const char *path;
 		status_t _stat;
+		bool finish;
 	} push;
 	struct {
 		InitConfig *config;
 		char *remote_name;
 		status_t _stat;
+		bool finish;
 	} pull;
 	struct {
 		InitConfig *config;
 		PairInfo **info;
 		size_t *len;
 		status_t _stat;
+		bool finish;
 	} scan;
 } params_t;
 
