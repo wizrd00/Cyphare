@@ -58,7 +58,7 @@ static inline int cli_pull_result(status_t status)
 
 static inline void cli_scan_info(size_t len)
 {
-	printf(CLI_SCAN_INFO_TEXT, len);
+	printf(CLI_SCAN_INFO_TEXT, (int) len);
 	putchar('\r');
 	fflush(stdout);
 	return;
@@ -71,14 +71,14 @@ static inline int cli_scan_result(status_t status, PairInfo *info, size_t len)
 		return -1;
 	}
 	putchar('\n');
-	for (int i = 0; i < len; i++)
+	for (int i = 0; i < (int) len; i++)
 		printf(CLI_SCAN_DONE_TEXT, i, info[i].name, info[i].ip, info[i].port);	
 	return 0;
 }
 
 static inline void cli_create_bar(void)
 {
-	printf(CLI_BAR_CONTEXT_TEXT, 0, 0);
+	printf(CLI_BAR_CONTEXT_TEXT, (unsigned long) 0, (unsigned long) 0);
 	putchar('\r');
 	return;
 }

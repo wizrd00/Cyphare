@@ -2,8 +2,6 @@
 #define CYPHARE_MKCONFIG_H
 
 #include "types.h"
-#include "librufshare/utils/fname.h"
-#include "librufshare/utils/sstr.h"
 #include <string.h>
 
 static inline void mkconfig_push(InitConfig *config, args_t *args)

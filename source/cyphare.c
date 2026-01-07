@@ -1,6 +1,6 @@
 #include "cyphare.h"
 
-static const char help[] =
+const char help[] =
 	"Cyphare version" " " VERSION " " "help message :\n"
 	"source code in https://github.com/wizrd00/Cyphare.git\n"
 	"./cyphare TASK [OPTIONS]\n"
@@ -21,7 +21,6 @@ int main(int argc, char *argv[])
 {
 	args_t args;
 	InitConfig config;
-	pthread_t handle;
 	CHECK_ARGC(argc);
 	if (strcmp(argv[1], PUSHSTR) == 0) {
 		if (push_argparse(argc, argv, &args) != 0)

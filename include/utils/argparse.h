@@ -3,7 +3,6 @@
 
 #include "types.h"
 #include "utils/randname.h"
-#include "librufshare/utils/sstr.h"
 #include <getopt.h>
 
 #define PUSHOPTSTR ":c:f:n:s:d:"

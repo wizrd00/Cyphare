@@ -41,7 +41,8 @@ int launch_push_file(InitConfig *config, const char *path, const char *logpath)
 	if (pthread_create(&hdl, NULL, thread_push_file, (void *) &param) != 0)
 		return -1;
 	while (!param.push.finish) {
-		cli_update_bar(config->seq, config->chcount);
+		if (config->seq != 0)
+			cli_update_bar(config->seq - 1, config->chcount);
 		nanosleep(&sleeptime, NULL);
 	}
 	cli_update_bar(config->seq - 1, config->chcount);
@@ -67,10 +68,11 @@ int launch_pull_file(InitConfig *config, const char *logpath)
 	if (pthread_create(&hdl, NULL, thread_pull_file, (void *) &param) != 0)
 		return -1;
 	while (!param.pull.finish) {
-		cli_update_bar(config->seq - 1, config->chcount);
+		if (config->seq != 0)
+			cli_update_bar(config->seq - 1, config->chcount);
 		nanosleep(&sleeptime, NULL);
 	}
-	cli_update_bar(config->seq, config->chcount);
+	cli_update_bar(config->seq - 1, config->chcount);
 	if (deinitiate() != 0)
 		return -1;
 	return _stat = cli_pull_result(param.pull._stat);
