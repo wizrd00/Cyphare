@@ -2,5 +2,4 @@
 *.elf
 *.sh
 *.py
-showlog.c
-filedir/
+utils/
