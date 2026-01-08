@@ -21,6 +21,7 @@
 #define INV_NAME_ERROR "invalid name %s\n\n"
 
 #define DEFAULT_LOG_PATH "./"
+#define DEFAULT_LOG_COUNT 8192
 #define DEFAULT_PULL_FILENAME "empty"
 #define DEFAULT_SRC_IP "0.0.0.0"
 #define DEFAULT_DST_IP "255.255.255.255"

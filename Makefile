@@ -31,6 +31,7 @@ LIBRUFSHARE := $(LIB_DIR)/librufshare.so
 POINTER_SYM := "\e[91m->\e[0m"
 
 $(CYPHARE) : $(OBJ_FILES) $(LIBRUFSHARE) $(HDR_FILES)
+	@mkdir -p $(BIN_DIR)
 	@/usr/bin/echo -e $(POINTER_SYM) "\e[96mlinking modules into" $@ "\e[0m"
 	$(CC) $(CFLAGS) -o $@ $(LIBRUFSHARE_OBJ) $(OBJ_FILES) $(LIB_FLAGS)
 	@/usr/bin/echo -e $(POINTER_SYM) "\e[93mstrip" $@ "\e[0m"

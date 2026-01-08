@@ -33,7 +33,7 @@ int launch_push_file(InitConfig *config, const char *path, const char *logpath)
 	param.push.config = config;
 	param.push.path = path;
 	param.push.finish = false;
-	if (initiate(logpath) != 0)
+	if (initiate(logpath, (size_t) DEFAULT_LOG_COUNT) != 0)
 		return -1;
 	cli_push_path(path);
 	cli_push_info(config->addrs.remote_ip, config->addrs.remote_port);
@@ -61,7 +61,7 @@ int launch_pull_file(InitConfig *config, const char *logpath)
 	param.pull.config = config;
 	param.pull.remote_name = remote_name;
 	param.pull.finish = false;
-	if (initiate(logpath) != 0)
+	if (initiate(logpath, (size_t) DEFAULT_LOG_COUNT) != 0)
 		return -1;
 	cli_pull_info(config->addrs.local_ip, config->addrs.local_port);
 	cli_create_bar();
@@ -90,7 +90,7 @@ int launch_scanpair(InitConfig *config, const char *logpath)
 	param.scan.info = &info;
 	param.scan.len = &len;
 	param.scan.finish = false;
-	if (initiate(logpath) != 0)
+	if (initiate(logpath, (size_t) DEFAULT_LOG_COUNT) != 0)
 		return -1;
 	if (pthread_create(&hdl, NULL, thread_scan_pair, (void *) &param) != 0)
 		return -1;
