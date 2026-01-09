@@ -10,7 +10,7 @@
 #include <pthread.h>
 
 #define LAUNCH_PUSH_FILE_INTERVAL 100000000
-#define LAUNCH_PULL_FILE_INTERVAL 200000000
+#define LAUNCH_PULL_FILE_INTERVAL 100000000
 #define LAUNCH_SCAN_PAIR_INTERVAL 1
 
 int launch_push_file(InitConfig *config, const char *path, const char *logpath);
