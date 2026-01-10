@@ -11,7 +11,7 @@ ifeq ($(CC), pcc)
 	LIBRUFSHARE_OBJ := $(LIB_DIR)/librufshare.so
 	LIB_FLAGS := -Wl,--library-path=$(LIB_DIR),-rpath=$(LIB_DIR)
 else ifeq ($(CC), gcc)
-	CFLAGS := -std=c99 -O2 -Wall -Wextra -Wpedantic -Wstrict-aliasing -Wcast-align -Wconversion -Wsign-conversion -Wshadow -Wswitch-enum -pthread	
+	CFLAGS := -std=c99 -O3 -Wall -Wextra -Wpedantic -Wstrict-aliasing -Wcast-align -Wconversion -Wsign-conversion -Wshadow -Wswitch-enum -pthread	
 	LIBRUFSHARE_OBJ :=
 	LIB_FLAGS := -L$(LIB_DIR) -lrufshare -Wl,-rpath=$(LIB_DIR) 
 else

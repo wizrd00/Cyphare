@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include <stdio.h>
+#include <time.h>
 
 #define CLI_PUSH_PATH_TEXT "[\x1b[36mPUSH\x1b[0m] -> the path '%s' specified\n"
 #define CLI_PUSH_INFO_TEXT "[\x1b[36mPUSH\x1b[0m] -> push the file to remote host with address %s:%hu\n"
@@ -17,6 +18,8 @@
 #define CLI_BAR_CONTEXT_TEXT "progress -> [%lu/%lu]"
 
 #define CLI_BAR_SYMBOL_COUNT 32
+
+static time_t start_time;
 
 static inline void cli_push_path(const char *path)
 {
@@ -37,6 +40,7 @@ static inline int cli_push_result(status_t status)
 		return -1;
 	}
 	printf(CLI_PUSH_DONE_TEXT);
+	printf("time = %ds\n", (int) (time(NULL) - start_time));
 	return 0;
 }
 
@@ -78,6 +82,7 @@ static inline int cli_scan_result(status_t status, PairInfo *info, size_t len)
 
 static inline void cli_create_bar(void)
 {
+	start_time = time(NULL);
 	printf(CLI_BAR_CONTEXT_TEXT, (unsigned long) 0, (unsigned long) 0);
 	putchar('\r');
 	return;
