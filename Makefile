@@ -1,5 +1,5 @@
 CYPHARE := cyphare.elf
-CC ?= pcc
+CC = pcc
 
 SRC_DIR := source
 INC_DIR := include
@@ -7,15 +7,15 @@ BIN_DIR := binary
 LIB_DIR := library
 
 ifeq ($(CC), pcc)
-	CFLAGS := -std=c99 -O3 -Wc,-Werror=implicit-function-declaration,-Werror=missing-prototypes,-Werror=pointer-sign,-Werror=sign-compare,-Werror=strict-prototypes,-Werror=shadow -pthread
-	LIBRUFSHARE_OBJ := $(LIB_DIR)/librufshare.so
-	LIB_FLAGS := -Wl,--library-path=$(LIB_DIR),-rpath=$(LIB_DIR)
+CFLAGS := -std=c99 -O3 -Wc,-Werror=implicit-function-declaration,-Werror=missing-prototypes,-Werror=pointer-sign,-Werror=sign-compare,-Werror=strict-prototypes,-Werror=shadow -pthread
+LIBRUFSHARE_OBJ := $(LIB_DIR)/librufshare.so
+LIB_FLAGS := -Wl,--library-path=$(LIB_DIR),-rpath=$(LIB_DIR)
 else ifeq ($(CC), gcc)
-	CFLAGS := -std=c99 -O3 -Wall -Wextra -Wpedantic -Wstrict-aliasing -Wcast-align -Wconversion -Wsign-conversion -Wshadow -Wswitch-enum -pthread	
-	LIBRUFSHARE_OBJ :=
-	LIB_FLAGS := -L$(LIB_DIR) -lrufshare -Wl,-rpath=$(LIB_DIR) 
+CFLAGS := -std=c99 -O3 -Wall -Wextra -Wpedantic -Wstrict-aliasing -Wcast-align -Wconversion -Wsign-conversion -Wshadow -Wswitch-enum -pthread
+LIBRUFSHARE_OBJ :=
+LIB_FLAGS := -L$(LIB_DIR) -lrufshare -Wl,-rpath=$(LIB_DIR) 
 else
-	$(error unsupported compiler : $(CC))
+$(error unsupported compiler : $(CC))
 endif
 LIBRUFSHARE_HDR := include/librufshare
 
