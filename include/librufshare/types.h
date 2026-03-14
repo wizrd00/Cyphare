@@ -9,9 +9,12 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include <time.h>
 #include <errno.h>
+#include <netinet/in.h>
 
+#define FOREVER_TIMEOUT -1
 #define MAXFILENAMESIZE 256
 #define MAXNAMESIZE 32
 #define MAXIPV4SIZE 16
